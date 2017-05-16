@@ -39,3 +39,24 @@ groupe section::getGroupe(int numeroGroupe)
 		system("pause");
 	}
 }
+
+groupe section::afficherGroupe()
+{
+	int numero;
+	do
+	{
+		system("cls");
+		cout << "Voici tout les groupes qui appartiennent à la section Fise1 :" << endl;
+		for (int k = 0; k < getNbrGroupe(); k++)
+		{
+			groupe unGroupe = getGroupe(k);
+			cout << k + 1 << ") Goupe " << unGroupe.getLettre() << endl;
+		}
+		cout << endl;
+		cout << "De quel groupe voulez-vous faire l'appel ?" << endl;
+		cout << ">>> ";
+		cin >> numero;
+	} while (numero <1 || numero >getNbrGroupe());
+	
+	return getGroupe(numero - 1);
+}
