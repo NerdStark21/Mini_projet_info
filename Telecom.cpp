@@ -113,5 +113,6 @@ section telecom::afficherSections()
 		cout << ">>> ";
 		cin >> numero;
 	} while (numero != 1);
-	listeSections_[1].afficherGroupe();
+	listeSections_[0].afficherGroupe();
+	return listeSections_[0];
 }
