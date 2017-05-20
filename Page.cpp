@@ -10,7 +10,6 @@ void test(groupe& leGroupe)
 	CImgDisplay disp;
 
 	Seance seance1(leGroupe, disp);
-	seance1.afficherPageX(0);
 }
 
 void affichageTest(groupe& leGroupe)

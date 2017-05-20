@@ -2,24 +2,41 @@
 
 #include "Section.h"
 #include "Page.h"
+#include <fstream>
 
 using namespace cimg_library;
 using namespace std;
 
 class Seance
 {
-	vector<CImg<unsigned char>> listImage_;
-	int nbrAbsent_;
+	// Vecteurs de stockage
+	vector<Page> listPage_;
+	vector<eleve> listAbsent_;
+	// Variables d'affichages
 	CImg<unsigned char> imageBlank_;
-	int pageActuelle_;
-	int nbrPresent_;
-	int nbrPage_;
 	CImgDisplay disp_;
-	void pageWait();
-	void appendImage(CImg<unsigned char> uneImage) { listImage_.push_back(uneImage); }
+	// Autres
+	int 
+		pageActuelle_,
+		nbrPresent_,
+		nbrPage_;
+	// Fonctions de navigation entre les pages
+	void 
+		pageWait(),
+		afficherPageX(int numeroPage),
+		afficherSuivante(),
+		afficherPrecedente();
+	// Fonctions de gestion des absents
+	void
+		testMouse(bool& next, bool& previous);
+	int
+		eleveSelectionne();
+	void appendAbsent(int numeroEleve) { listAbsent_.push_back(listPage_[pageActuelle_].getListEleve()[numeroEleve]); }
+	// Fonctions de fin d'appel
+	void
+		afficherEndPage(),
+		sauvegarde();
 public:
 	Seance(groupe leGroupe, CImgDisplay& disp);
-	void afficherPageX(int numeroPage);
-	void afficherSuivante();
-	void afficherPrecedente();
+	~Seance();
 };
