@@ -92,9 +92,7 @@ void affichageTest(groupe& leGroupe)
 			int mouseX = disp.mouse_x();
 			int mouseY = disp.mouse_y();
 			if (mouseX > 1200 && mouseX < 1250 && mouseY>670 && mouseY < 680)
-			{
 				condition = TRUE;
-			}
 			else
 				disp.wait();
 		}
@@ -199,39 +197,35 @@ Page::Page(int numeroPage, vector<eleve>& listEleve, int nbrPage)
 	nbrEleve_ = listEleve.size();
 	numeroPage_ = numeroPage;
 	listEleve_ = listEleve;
+	for (int k = 0; k < nbrEleve_; k++)
+	{
+		Image imgEtudiant(listEleve_[k], k);
+		appendImgEtudiant(imgEtudiant);
+	}
 	// On initie tout de suite le construction de l'image du groupe donné
 	Page::constructionImage();
 }
 
+void Page::actualiserPage(int numeroImage)
+{
+	listImgEtudiant_[numeroImage].modifierImage();
+	if (numeroImage < 5)
+		// On positionne d'abord l'image
+		image_.draw_image(250 * numeroImage, listImgEtudiant_[numeroImage].getImage());
+	else
+		image_.draw_image(250 * (numeroImage - 5), 320 + 20, listImgEtudiant_[numeroImage].getImage());
+}
+
 void Page::constructionImage()
 {
-	CImg<unsigned char> imgEtudiant;
-
-	for (unsigned int k = 0; k < listEleve_.size(); k++)
+	for (int k = 0; k < nbrEleve_; k++)
 	{
-		string photo;
-		// On extrait un élève pour pouvoir utiliser les fonctions de la classe élève
-		eleve etudiant = listEleve_[k];
-		// On récupère le nom du fichier de la photo de l'étudiant
-		etudiant.getPhoto(photo);
-		// On converti le string en char* car un nom de fichier ne peut pas être un string ici et on charge la photo voulue
-		imgEtudiant.load(photo.c_str());
 		// On affiche que 5 images par ligne
 		if (k < 5)
-		{
 			// On positionne d'abord l'image
-			image_.draw_image(240 * k + 10 * (k + 1), 0, imgEtudiant);
-			// On créé la chaine de caractère Nom + Prénom
-			string nomPrenom = etudiant.getNom() + " " + etudiant.getPrenom();
-			// On positionne ensuite cette chaine sous l'image correspondante
-			image_.draw_text(240 * k + 10 * (k + 1), 320, nomPrenom.c_str(), "texte");
-		}
+			image_.draw_image(250 * k, 0, listImgEtudiant_[k].getImage());
 		else
-		{
-			image_.draw_image(240 * (k - 5) + 10 * (k - 4), 320 + 20, imgEtudiant);
-			string nomPrenom = etudiant.getNom() + "   " + etudiant.getPrenom();
-			image_.draw_text(240 * (k - 5) + 10 * (k - 4), 320 * 2 + 20, nomPrenom.c_str(), "texte");
-		}
+			image_.draw_image(250 * (k - 5), 320 + 20, listImgEtudiant_[k].getImage());
 	}
 	cout << "Page n= " << numeroPage_ << endl;
 	cout << "Il y a " << nbrPage_ << " pages." << endl;

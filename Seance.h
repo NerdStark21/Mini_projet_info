@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Section.h"
 #include "Page.h"
 #include <fstream>
 
@@ -11,7 +10,6 @@ class Seance
 {
 	// Vecteurs de stockage
 	vector<Page> listPage_;
-	vector<eleve> listAbsent_;
 	// Variables d'affichages
 	CImg<unsigned char> imageBlank_;
 	CImgDisplay disp_;
@@ -21,22 +19,24 @@ class Seance
 		nbrPresent_,
 		nbrPage_;
 	// Fonctions de navigation entre les pages
-	void 
+	void
 		pageWait(),
 		afficherPageX(int numeroPage),
 		afficherSuivante(),
 		afficherPrecedente();
 	// Fonctions de gestion des absents
 	void
-		testMouse(bool& next, bool& previous);
+		testMouse(bool& next, bool& previous, bool& end, bool& actualisation);
 	int
 		eleveSelectionne();
-	void appendAbsent(int numeroEleve) { listAbsent_.push_back(listPage_[pageActuelle_].getListEleve()[numeroEleve]); }
 	// Fonctions de fin d'appel
 	void
 		afficherEndPage(),
 		sauvegarde();
 public:
 	Seance(groupe leGroupe, CImgDisplay& disp);
+	void actualiserPresence(int numeroEleve);
+	vector<eleve> getAbsent();
+	vector<Page> getListPage() { return listPage_; }
 	~Seance();
 };

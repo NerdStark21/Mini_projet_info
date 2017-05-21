@@ -1,5 +1,6 @@
 #include "Section.h"
 #include "CImg.h"
+#include "Page.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -18,8 +19,6 @@ section initialisation()
 
 	// On crée la Fise1 et son pointeur
 	section Fise1(1);
-	//section* Fise1_p;
-	//Fise1_p = &Fise1;
 	// On crée les 5 groupes
 	groupe groupeA('A'), groupeB('B'), groupeC('C'), groupeD('D'), groupeE('E');
 
@@ -86,62 +85,17 @@ groupe afficherMenu(section Fise)
 	return Fise.afficherGroupe();
 }
 
-void affichage(section Fise1)
-{
-	// Usefull colors
-	unsigned char
-		grid_color[3] = { 0,0,255 },
-		play1_color[3] = { 204,0,0 },
-		play2_color[3] = { 0,102,0 };
-
-	// Declare an image to draw the grid
-	CImg<unsigned char> grid(500, 500, 1, 3, 255); // longueur, largueur
-	// Declare an image
-	CImg<unsigned char> image1, image2;
-	// Load an image file into it
-	image1.load("img-001.ppm");
-	image2.load("img-002.ppm");
-	grid.draw_image(image1);
-	//grid.draw_image(image2, 50);
-
-	// Declare a display to draw the scene
-	CImgDisplay disp(grid, "Tic-tac-toe", 0, false, false);
-
-	// Center the window on the screen
-	disp.move((CImgDisplay::screen_width() - disp.width()) / 2,
-		(CImgDisplay::screen_height() - disp.height()) / 2);
-
-	// Declare an image to display the scene
-	CImg<unsigned char> scene = grid;
-
-	// Usefull variables
-	int player = 1;
-	int table[3][3] = { 0,0,0,0,0,0,0,0,0 };
-
-	// Main loop, exit if the display window is closed or if ESC or Q key is hit
-	while (!disp.is_closed() && !disp.is_keyESC() && !disp.is_keyQ()) {
-
-		// Display the scene
-		scene.display(disp);
-
-		disp.wait();
-
-		// Handle window resize
-		if (disp.is_resized()) disp.resize();
-	}
-}
-
 int main()
 {
 	cout << "###   Initialisation terminée   ###" << endl;
-	section Fise1 = initialisation();
+	//section Fise1 = initialisation();
 	//Fise1.afficherToutLeMonde();	// Pour vérifier que tout le mode est bien dedans
 
 	// Retourne directement le groupe selectionné par l'utilisateur
-	groupe selectionUt = afficherMenu(Fise1);
+	//groupe selectionUt = afficherMenu(Fise1);
 	//cout << "Nous avons bien recupéré le groupe que vous avez sélectionné =)" << endl;
 
-	//affichage(initialisation());
+	test(afficherMenu(initialisation()));
 
 	return 0;
 }

@@ -9,12 +9,13 @@ void Seance::pageWait()
 	bool
 		next = FALSE,
 		previous = FALSE,
-		end = FALSE;
+		end = FALSE,
+		actualisation = FALSE;
 	disp_.wait(1000);
-	while (disp_.button() != 0x1 || (!next && !previous))
+	while (disp_.button() != 0x1 || (!next && !previous && !end))
 	{
 		// Si l'on clique sur l'image en bas à gauche
-		testMouse(next, previous);
+		testMouse(next, previous, end, actualisation);
 	}
 	if (previous)
 	{
@@ -22,17 +23,23 @@ void Seance::pageWait()
 		imageBlank_.display(disp_);
 		afficherPrecedente();
 	}
-	if (next)
+	else if (next)
 	{
 		disp_.wait(500);
 		imageBlank_.display(disp_);
 		afficherSuivante();
 	}
-	if (end)
+	else if (end)
 		afficherEndPage();
+	else if (actualisation)
+	{
+		afficherPageX(pageActuelle_);
+		cout << "#########" << endl;
+	}
+		
 }
 
-void Seance::testMouse(bool& next, bool& previous)
+void Seance::testMouse(bool& next, bool& previous, bool& end, bool& actualisation)
 {
 	int
 		mouseX = disp_.mouse_x(),
@@ -42,18 +49,23 @@ void Seance::testMouse(bool& next, bool& previous)
 	{
 		next = TRUE;
 		if (pageActuelle_ == nbrPage_ - 1)
+		{
 			next = FALSE;
+			end = TRUE;
+		}
 	}
-	if (mouseX > 0 && mouseX < 50 && mouseY>670 && mouseY < 680 && pageActuelle_ > 0)
+	else if (mouseX > 0 && mouseX < 50 && mouseY>670 && mouseY < 680 && pageActuelle_ > 0)
 		previous = TRUE;
 	else
 	{
 		numeroeleve = eleveSelectionne();
+		cout << "numero eleve = " << numeroeleve << endl;
 		if (numeroeleve != -1)
 		{
-			appendAbsent(numeroeleve);
+			actualiserPresence(numeroeleve);
+			cout << "presence actualisée" << endl;
+			actualisation = TRUE;
 		}
-		disp_.wait();
 	}
 }
 
@@ -118,6 +130,31 @@ Seance::Seance(groupe leGroupe, CImgDisplay& disp)
 	}
 
 	afficherPageX(0);
+}
+
+void Seance::actualiserPresence(int numeroEleve)
+{
+	listPage_[pageActuelle_].actualiserPage(numeroEleve);
+	cout << "page actualisée" << endl;
+}
+
+vector<eleve> Seance::getAbsent()
+{
+	vector<eleve> listAbsent;
+	vector<Page> lesPage = getListPage();
+	vector<Page>::iterator itPage;
+	vector<Image> lesImages;
+	vector<Image>::iterator itImage;
+
+	for (itPage = lesPage.begin(); itPage != lesPage.end(); itPage++)
+	{
+		lesImages = (*itPage).getListImgEtudiant();
+		for (itImage = lesImages.begin(); itImage != lesImages.end(); itImage++)
+		{
+			listAbsent.push_back(*(*itImage).getEleve());
+		}
+	}
+	return listAbsent;
 }
 
 Seance::~Seance()
@@ -190,5 +227,5 @@ void Seance::sauvegarde()
 	string nomSeance = "Seance1";
 	ofstream flux(nomSeance+".txt");
 	flux << "Recapitulatif de la seance 1" << endl;
-	flux << "Il y a eu " << listAbsent_.size() << " absents." << endl;
+	flux << "Il y a eu " << getAbsent().size() << " absents." << endl;
 }
