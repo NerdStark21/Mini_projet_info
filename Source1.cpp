@@ -1,4 +1,5 @@
 #include "CImg.h"
+#include "Page.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -88,7 +89,7 @@ groupe afficherMenu(section Fise)
 	return Fise.afficherGroupe();
 }
 
-void affichage(section Fise1)
+/*void affichage(section Fise1)
 {
 	// Usefull colors
 	unsigned char
@@ -132,7 +133,7 @@ void affichage(section Fise1)
 		if (disp.is_resized()) disp.resize();
 	}
 }
-
+*/
 int main()
 {
 	cout << "###   Initialisation terminée   ###" << endl;
@@ -141,6 +142,7 @@ int main()
 
 	telecom tse(3);
 	section Fise1 = tse.afficherSections();
+	test(tse.getListeSections()[0].afficherGroupe());
 	// Retourne directement le groupe selectionné par l'utilisateur
 	//groupe selectionUt = afficherMenu(Fise1);
 	//cout << "Nous avons bien recupéré le groupe que vous avez sélectionné =)" << endl;
