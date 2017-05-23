@@ -28,7 +28,7 @@ class Seance
 	void
 		testMouse(bool& next, bool& previous, bool& end, bool& actualisation);
 	int
-		eleveSelectionne();
+		eleveSelectionne(int mouseX, int mouseY);
 	// Fonctions de fin d'appel
 	void
 		afficherEndPage(),

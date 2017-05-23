@@ -208,7 +208,11 @@ Page::Page(int numeroPage, vector<eleve>& listEleve, int nbrPage)
 
 void Page::actualiserPage(int numeroImage)
 {
+	listImgEtudiant_[numeroImage].actualisationAbsence();
 	listImgEtudiant_[numeroImage].modifierImage();
+	//CImgDisplay disp;
+	//listImgEtudiant_[numeroImage].getImage().display(disp);
+	//disp.wait(3000);
 	if (numeroImage < 5)
 		// On positionne d'abord l'image
 		image_.draw_image(250 * numeroImage, listImgEtudiant_[numeroImage].getImage());

@@ -11,21 +11,29 @@ void Seance::pageWait()
 		previous = FALSE,
 		end = FALSE,
 		actualisation = FALSE;
-	disp_.wait(1000);
-	while (disp_.button() != 0x1 || (!next && !previous && !end))
+
+	while (disp_.button() == 1)
+		disp_.wait();
+	while (disp_.button() != 1 || (!next && !previous && !end && !actualisation))
 	{
-		// Si l'on clique sur l'image en bas à gauche
-		testMouse(next, previous, end, actualisation);
+		// Si l'on clique
+		if (disp_.button() == 1)
+		{
+			testMouse(next, previous, end, actualisation);
+		}
+		else
+			disp_.wait();
+		//disp_.wait(50);
 	}
 	if (previous)
 	{
-		disp_.wait(500);
+		//disp_.wait(500);
 		imageBlank_.display(disp_);
 		afficherPrecedente();
 	}
 	else if (next)
 	{
-		disp_.wait(500);
+		//disp_.wait(500);
 		imageBlank_.display(disp_);
 		afficherSuivante();
 	}
@@ -34,7 +42,6 @@ void Seance::pageWait()
 	else if (actualisation)
 	{
 		afficherPageX(pageActuelle_);
-		cout << "#########" << endl;
 	}
 		
 }
@@ -58,29 +65,26 @@ void Seance::testMouse(bool& next, bool& previous, bool& end, bool& actualisatio
 		previous = TRUE;
 	else
 	{
-		numeroeleve = eleveSelectionne();
+		numeroeleve = eleveSelectionne(mouseX, mouseY);
 		cout << "numero eleve = " << numeroeleve << endl;
 		if (numeroeleve != -1)
 		{
 			actualiserPresence(numeroeleve);
-			cout << "presence actualisée" << endl;
 			actualisation = TRUE;
 		}
 	}
 }
 
-int Seance::eleveSelectionne()
+int Seance::eleveSelectionne(int mouseX, int mouseY)
 {
 	int
-		mouseX = disp_.mouse_x(),
-		mouseY = disp_.mouse_y(),
 		numeroeleve = -1;
 	for (int ligne = 0; ligne < 2; ligne++)
 	{
 		for (int colonne = 0; colonne < 5; colonne++)
 		{
 			if (mouseX > 10 * (colonne + 1) + colonne * 240 && mouseX < 10 * (colonne + 1) + (colonne + 1) * 240
-				&& mouseY > 260 * ligne && mouseY < 260 * ligne + 240)
+				&& mouseY > 320 * ligne && mouseY < 340 * ligne + 360)
 			{
 				numeroeleve = ligne * 5 + colonne;
 			}
@@ -135,7 +139,6 @@ Seance::Seance(groupe leGroupe, CImgDisplay& disp)
 void Seance::actualiserPresence(int numeroEleve)
 {
 	listPage_[pageActuelle_].actualiserPage(numeroEleve);
-	cout << "page actualisée" << endl;
 }
 
 vector<eleve> Seance::getAbsent()
@@ -169,8 +172,6 @@ Seance::~Seance()
 
 void Seance::afficherPageX(int numeroPage)
 {
-	cout << "Il y a " << nbrPage_ << " pages en tout." << endl;
-	cout << "Vous avez demandé à afficher la page n= " << numeroPage << endl;
 	if (numeroPage >= 0 && numeroPage < nbrPage_)
 	{
 		imageBlank_.display(disp_);

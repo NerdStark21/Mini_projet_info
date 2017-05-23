@@ -12,6 +12,9 @@ void Image::modifierImage()
 	else
 		imgCheck.load("tn_check_rouge.ppm");
 	image_.draw_image(225, 0, imgCheck);
+	//CImgDisplay disp;
+	//image_.display(disp);
+	//disp.wait(5000);
 }
 
 Image::Image(eleve& unEleve, int numeroImage)
