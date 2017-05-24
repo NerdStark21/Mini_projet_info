@@ -14,4 +14,5 @@ public:
 	std::string getPrenom() { return prenom_; }
 	char getNumeroGroupe() { return lettreGroupe_; }
 	std::string getPhoto() { return photo_; }
+	void getPhoto(std::string& photo) { photo = photo_; }
 };

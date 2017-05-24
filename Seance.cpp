@@ -1,8 +1,19 @@
 #include <iostream>
+#include <fstream>
 #include "Seance.h"
 
 using namespace std;
 using namespace cimg_library;
+
+void test(groupe& leGroupe)
+{
+	CImgDisplay disp;
+
+	Seance seance1(leGroupe, disp);
+
+	seance1.afficherEndPage();
+	seance1.sauvegarde();
+}
 
 void Seance::pageWait()
 {
@@ -38,12 +49,14 @@ void Seance::pageWait()
 		afficherSuivante();
 	}
 	else if (end)
-		afficherEndPage();
+	{
+		//afficherEndPage();
+		//sauvegarde();
+    }
 	else if (actualisation)
 	{
 		afficherPageX(pageActuelle_);
 	}
-		
 }
 
 void Seance::testMouse(bool& next, bool& previous, bool& end, bool& actualisation)
@@ -89,6 +102,10 @@ int Seance::eleveSelectionne(int mouseX, int mouseY)
 				numeroeleve = ligne * 5 + colonne;
 			}
 		}
+	}
+	if (numeroeleve >= listPage_[pageActuelle_].getNbrEleve())
+	{
+		numeroeleve = -1;
 	}
 	return numeroeleve;
 }
@@ -148,13 +165,22 @@ vector<eleve> Seance::getAbsent()
 	vector<Page>::iterator itPage;
 	vector<Image> lesImages;
 	vector<Image>::iterator itImage;
+	eleve* unEleve;
+	cout << "Définition des objets de getAbsent" << endl;
 
 	for (itPage = lesPage.begin(); itPage != lesPage.end(); itPage++)
 	{
 		lesImages = (*itPage).getListImgEtudiant();
+		cout << "Définition de lesImages" << endl;
 		for (itImage = lesImages.begin(); itImage != lesImages.end(); itImage++)
 		{
-			listAbsent.push_back(*(*itImage).getEleve());
+			if (!(*itImage).getPresence())
+			{
+				unEleve = (*itImage).getEleve();
+				cout << "nom eleve : " << (*unEleve).getNom() << endl;
+				listAbsent.push_back(*unEleve);
+				cout << "pushback ok" << endl;
+			}
 		}
 	}
 	return listAbsent;
@@ -163,11 +189,9 @@ vector<eleve> Seance::getAbsent()
 Seance::~Seance()
 {
 	cout << "Destruction initiée !" << endl;
-	cout << "Sauvegarde en cours" << endl;
-	sauvegarde();
-	cout << "Sauvegarde effectuée" << endl;
+	//afficherEndPage();
+	//sauvegarde();
 	disp_.close();
-	cout << "Destruction terminée" << endl;
 }
 
 void Seance::afficherPageX(int numeroPage)
@@ -219,14 +243,23 @@ void Seance::afficherPrecedente()
 void Seance::afficherEndPage()
 {
 	imageBlank_.display(disp_);
-	imageBlank_.draw_text(500, 500, "END", "texte");
-	disp_.wait(5000);
+	imageBlank_.draw_text(500, 200, "La saisie des absents est terminée.", "texte");
+	imageBlank_.display(disp_);
+	disp_.wait();
 }
 
 void Seance::sauvegarde()
 {
 	string nomSeance = "Seance1";
+	cout << "############################# SAUVEGARDE" << endl;
 	ofstream flux(nomSeance+".txt");
-	flux << "Recapitulatif de la seance 1" << endl;
-	flux << "Il y a eu " << getAbsent().size() << " absents." << endl;
+	vector<eleve> absent = getAbsent();
+	flux << "Recapitulatif de la seance 1" << endl << endl;
+	cout << absent.size() << endl;
+	flux << "Il y a eu " << absent.size() << " absents." << endl << endl;
+	flux << "    Nom :    " << "    Prenom :    " << endl << endl;
+	for (int i=0; i< absent.size();i++)
+	{
+		flux << (absent[i]).getNom() <<"        "<< absent[i].getPrenom() << endl << endl;
+	}
 }
