@@ -4,7 +4,7 @@
 
 #define largueur_fenetre 1250
 #define hauteur_fenetre 700
-#define largueur_image 250
+#define largueur_image 240
 #define hauteur_image 340
 #define taille_check 50
 

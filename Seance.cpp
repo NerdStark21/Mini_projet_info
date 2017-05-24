@@ -3,7 +3,7 @@
 
 #define largueur_fenetre 1250
 #define hauteur_fenetre 700
-#define largueur_image 250
+#define largueur_image 240
 #define hauteur_image 340
 #define taille_check 50
 
@@ -263,7 +263,7 @@ void Seance::sauvegarde()
 	cout << absent.size() << endl;
 	flux << "Il y a eu " << absent.size() << " absents." << endl << endl;
 	flux << "    Nom :    " << "    Prenom :    " << endl << endl;
-	for (int i = 0; i< absent.size(); i++)
+	for (unsigned int i = 0; i< absent.size(); i++)
 	{
 		flux << (absent[i]).getNom() << "        " << absent[i].getPrenom() << endl << endl;
 	}

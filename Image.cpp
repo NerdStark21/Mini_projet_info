@@ -1,7 +1,7 @@
 #include "Image.h"
 #include <iostream>
 
-#define largueur_image 250
+#define largueur_image 240
 #define hauteur_image 340
 #define taille_check 50
 
@@ -38,6 +38,7 @@ Image::Image(eleve& unEleve, int numeroImage)
 	// On converti le string en char* car un nom de fichier ne peut pas être un string ici et on charge la photo voulue
 	imgEtudiant.load(photo.c_str());
 	// On positionne l'image de l'étudiant
+	imgEtudiant.resize(240, 310);
 	image_.draw_image(5, 0, imgEtudiant);
 	// On positionne maintenant le cadre de check
 	imgEtudiant.load("tn_check_vert.ppm");
