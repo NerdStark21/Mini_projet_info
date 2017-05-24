@@ -95,8 +95,7 @@ int main()
 
 	CImgDisplay disp;
 	Seance seance1(tse.getListeSection()[0].afficherGroupe(), disp);
-	seance1.afficherEndPage();
-	seance1.sauvegarde();
+	seance1.launcher();
 
 	return 0;
 }

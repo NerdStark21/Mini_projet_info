@@ -10,17 +10,42 @@
 using namespace std;
 using namespace cimg_library;
 
-
-void test(groupe& leGroupe)
+void Seance::launcher()
 {
-	CImgDisplay disp;
-	Seance seance1(leGroupe, disp);
-	seance1.afficherEndPage();
+	imageBlank_.display(disp_);
+	afficherPageX(0);
+	// 1 = next, 2 = previous, 3 = actualisation, 4 = end
+	int wait = 1;
 
-	seance1.sauvegarde();
+	while (wait > 0 && wait < 4)
+	{
+		wait = pageWait();
+		imageBlank_.display(disp_);
+		switch (wait)
+		{
+		case 1:
+			afficherSuivante();
+			break;
+		case 2:
+			afficherPrecedente();
+			break;
+		case 3:
+			afficherPageX(pageActuelle_);
+			break;
+		default:
+			cout << "coucou" << endl;
+		}
+	}
+	if (wait == 4)
+	{
+		afficherEndPage();
+		sauvegarde();
+	}
+	else
+		cout << "Erreur au niveau du launcher de seance" << endl;
 }
 
-void Seance::pageWait()
+int Seance::pageWait()
 {
 	bool
 		next = FALSE,
@@ -39,26 +64,16 @@ void Seance::pageWait()
 			disp_.wait();
 		//disp_.wait(50);
 	}
-	if (previous)
-	{
-		//disp_.wait(500);
-		imageBlank_.display(disp_);
-		afficherPrecedente();
-	}
-	else if (next)
-	{
-		//disp_.wait(500);
-		imageBlank_.display(disp_);
-		afficherSuivante();
-	}
-	else if (end)
-	{
-		//afficherEndPage();
-	}
-		
+	if (next)
+		return 1;
+	else if (previous)
+		return 2;
 	else if (actualisation)
-		afficherPageX(pageActuelle_);
-		
+		return 3;
+	else if (end)
+		return 4;
+	else
+		return -1;
 }
 
 void Seance::testMouse(bool& next, bool& previous, bool& end, bool& actualisation)
@@ -144,8 +159,6 @@ Seance::Seance(groupe leGroupe, CImgDisplay& disp)
 		listPage_.push_back(unePage);
 		cout << "Une image ajoutée" << endl;
 	}
-
-	afficherPageX(0);
 }
 
 void Seance::actualiserPresence(int numeroEleve)
@@ -193,12 +206,10 @@ void Seance::afficherPageX(int numeroPage)
 {
 	if (numeroPage >= 0 && numeroPage < nbrPage_)
 	{
-		imageBlank_.display(disp_);
 		listPage_[numeroPage].getImage().display(disp_);
 		pageActuelle_ = numeroPage;
 		disp_.set_fullscreen(disp_.is_fullscreen());
 		disp_.move(10, 40);
-		pageWait();
 	}
 	else
 	{

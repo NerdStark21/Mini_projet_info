@@ -2,17 +2,14 @@
 #include "Page.h"
 #include "Seance.h"
 
+#define largueur_fenetre 1250
+#define hauteur_fenetre 700
+#define largueur_image 250
+#define hauteur_image 340
+#define taille_check 50
+
 using namespace std;
 using namespace cimg_library;
-
-/*
-void test(groupe& leGroupe)
-{
-	CImgDisplay disp;
-
-	Seance seance1(leGroupe, disp);
-}
-*/
 
 void affichageTest(groupe& leGroupe)
 {
@@ -217,9 +214,9 @@ void Page::actualiserPage(int numeroImage)
 	//disp.wait(3000);
 	if (numeroImage < 5)
 		// On positionne d'abord l'image
-		image_.draw_image(250 * numeroImage, listImgEtudiant_[numeroImage].getImage());
+		image_.draw_image(largueur_image * numeroImage, listImgEtudiant_[numeroImage].getImage());
 	else
-		image_.draw_image(250 * (numeroImage - 5), 320 + 20, listImgEtudiant_[numeroImage].getImage());
+		image_.draw_image(largueur_image * (numeroImage - 5), hauteur_image, listImgEtudiant_[numeroImage].getImage());
 }
 
 void Page::constructionImage()
@@ -229,31 +226,31 @@ void Page::constructionImage()
 		// On affiche que 5 images par ligne
 		if (k < 5)
 			// On positionne d'abord l'image
-			image_.draw_image(250 * k, 0, listImgEtudiant_[k].getImage());
+			image_.draw_image(largueur_image * k, 0, listImgEtudiant_[k].getImage());
 		else
-			image_.draw_image(250 * (k - 5), 320 + 20, listImgEtudiant_[k].getImage());
+			image_.draw_image(largueur_image * (k - 5), hauteur_image, listImgEtudiant_[k].getImage());
 	}
 	cout << "Page n= " << numeroPage_ << endl;
 	cout << "Il y a " << nbrPage_ << " pages." << endl;
-	if (numeroPage_ < nbrPage_-1)
+	if (numeroPage_ < nbrPage_ - 1)
 	{
 		// Bouton NEXT si on est pas à la dernière page
-		image_.draw_text(1200, 670, "NEXT >>>", "texte");
+		image_.draw_text(largueur_fenetre - 50, hauteur_fenetre - 30, "NEXT >>>", "texte");
 		unsigned char grid_color[3] = { 0, 0, 0 };
-		image_.draw_rectangle(1180, 670, 1260, 685, grid_color, 0.2);
+		image_.draw_rectangle(largueur_fenetre - 70, hauteur_fenetre - 30, largueur_fenetre, hauteur_fenetre - 15, grid_color, 0.2);
 	}
 	if (numeroPage_ == nbrPage_ - 1)
 	{
 		// Bouton END si on est à la dernière page
 		image_.draw_text(1200, 670, "END >>>", "texte");
 		unsigned char grid_color[3] = { 0, 0, 0 };
-		image_.draw_rectangle(1180, 670, 1260, 685, grid_color, 0.2);
+		image_.draw_rectangle(largueur_fenetre - 70, hauteur_fenetre - 30, largueur_fenetre, hauteur_fenetre - 15, grid_color, 0.2);
 	}
 	if (numeroPage_ > 0)
 	{
 		// Bouton PREVIOUS si on est pas à la première page
-		image_.draw_text(0, 670, "<<< PREVIOUS", "texte");
+		image_.draw_text(0, hauteur_fenetre - 30, "<<< PREVIOUS", "texte");
 		unsigned char grid_color[3] = { 0, 0, 0 };
-		image_.draw_rectangle(0, 670, 50, 680, grid_color, 0.2);
+		image_.draw_rectangle(0, hauteur_fenetre - 30, 80, hauteur_fenetre - 20, grid_color, 0.2);
 	}
 }
