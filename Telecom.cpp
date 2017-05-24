@@ -63,7 +63,7 @@ telecom::telecom(int nbrsections)
 		Fise1.append(groupeD);
 		Fise1.append(groupeE);
 
-		listeSections_.push_back(Fise1); // On retourne la Fise1 pour pouvoir l'utiliser dans le main (sinon elle est détruite lorsqu'on sort de la fonction d'initialisation
+		append(Fise1); // On retourne la Fise1 pour pouvoir l'utiliser dans le main (sinon elle est détruite lorsqu'on sort de la fonction d'initialisation
 	}
 	else
 		cout << "Il y a une erreur dans la matrice au niveau de l'ouverture de Fise1.txt pour l'initialisation" << endl;
@@ -113,6 +113,6 @@ section telecom::afficherSections()
 		cout << ">>> ";
 		cin >> numero;
 	} while (numero != 1);
-	listeSections_[0].afficherGroupe();
+	
 	return listeSections_[0];
 }

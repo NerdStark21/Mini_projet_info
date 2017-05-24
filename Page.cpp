@@ -5,12 +5,14 @@
 using namespace std;
 using namespace cimg_library;
 
+/*
 void test(groupe& leGroupe)
 {
 	CImgDisplay disp;
 
 	Seance seance1(leGroupe, disp);
 }
+*/
 
 void affichageTest(groupe& leGroupe)
 {
@@ -187,7 +189,7 @@ void affichageQuiMarche(groupe& leGroupe)
 			disp.wait();
 }
 
-Page::Page(int numeroPage, vector<eleve>& listEleve, int nbrPage)
+Page::Page(int numeroPage, vector<eleve> listEleve, int nbrPage)
 {
 	nbrPage_ = nbrPage;
 	// On initialise l'image comme étant une image blanche (RVB)
@@ -233,7 +235,7 @@ void Page::constructionImage()
 	}
 	cout << "Page n= " << numeroPage_ << endl;
 	cout << "Il y a " << nbrPage_ << " pages." << endl;
-	if (numeroPage_ < nbrPage_)
+	if (numeroPage_ < nbrPage_-1)
 	{
 		// Bouton NEXT si on est pas à la dernière page
 		image_.draw_text(1200, 670, "NEXT >>>", "texte");

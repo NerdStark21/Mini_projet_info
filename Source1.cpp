@@ -1,5 +1,5 @@
 #include "CImg.h"
-#include "Page.h"
+#include "Seance.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -142,12 +142,19 @@ int main()
 
 	telecom tse(3);
 	section Fise1 = tse.afficherSections();
-	test(tse.getListeSections()[0].afficherGroupe());
+	//test(tse.getListeSections()[0].afficherGroupe());
 	// Retourne directement le groupe selectionné par l'utilisateur
 	//groupe selectionUt = afficherMenu(Fise1);
 	//cout << "Nous avons bien recupéré le groupe que vous avez sélectionné =)" << endl;
 
 	//affichage(initialisation());
+
+	CImgDisplay disp;
+
+	Seance seance1(tse.getListeSections()[0].afficherGroupe(), disp);
+
+	seance1.afficherEndPage();
+	seance1.sauvegarde();
 
 	return 0;
 }

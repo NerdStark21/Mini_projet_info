@@ -21,4 +21,5 @@ public:
 	CImg<unsigned char> getImage() {return image_; }
 	eleve* getEleve() { return eleveAssocie_p_; }
 	void actualisationAbsence();
+	bool getPresence(){ return present_ ; }
 };

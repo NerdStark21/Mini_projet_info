@@ -6,6 +6,8 @@
 using namespace cimg_library;
 using namespace std;
 
+void test(groupe& leGroupe);
+
 class Seance
 {
 	// Vecteurs de stockage
@@ -30,13 +32,14 @@ class Seance
 	int
 		eleveSelectionne(int mouseX, int mouseY);
 	// Fonctions de fin d'appel
-	void
-		afficherEndPage(),
-		sauvegarde();
+
 public:
 	Seance(groupe leGroupe, CImgDisplay& disp);
 	void actualiserPresence(int numeroEleve);
 	vector<eleve> getAbsent();
-	vector<Page> getListPage() { return listPage_; }
+	vector<Page>& getListPage() { return listPage_; }
 	~Seance();
+	void
+		afficherEndPage(),
+		sauvegarde();
 };
