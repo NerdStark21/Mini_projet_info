@@ -32,7 +32,7 @@ class Seance
 	int
 		eleveSelectionne(int mouseX, int mouseY);
 	// Fonctions de fin d'appel
-
+	
 public:
 	Seance(groupe leGroupe, CImgDisplay& disp);
 	void actualiserPresence(int numeroEleve);

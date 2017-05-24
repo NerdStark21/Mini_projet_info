@@ -2,17 +2,19 @@
 
 #include <string>
 
+using namespace std;
+
 class eleve
 {
-	std::string nom_;
-	std::string prenom_;
+	string nom_;
+	string prenom_;
 	char lettreGroupe_;		// Un seul caractere
-	std::string photo_;					// Le nom de la photo associée
+	string photo_;		// Le nom de la photo associée
 public:
-	eleve(std::string nom, std::string prenom, char lettreGroupe, std::string photo);
-	std:: string getNom() { return nom_; }
-	std::string getPrenom() { return prenom_; }
+	eleve(string nom, string prenom, char lettreGroupe, string photo);
+	string getNom() { return nom_; }
+	string getPrenom() { return prenom_; }
 	char getNumeroGroupe() { return lettreGroupe_; }
-	std::string getPhoto() { return photo_; }
-	void getPhoto(std::string& photo) { photo = photo_; }
+	void getPhoto(string& photo) { photo = photo_; }
+	string getPhoto() { return photo_; }
 };

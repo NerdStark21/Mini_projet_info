@@ -1,17 +1,22 @@
 #include <iostream>
-#include <fstream>
 #include "Seance.h"
+
+#define largueur_fenetre 1250
+#define hauteur_fenetre 700
+#define largueur_image 250
+#define hauteur_image 340
+#define taille_check 50
 
 using namespace std;
 using namespace cimg_library;
 
+
 void test(groupe& leGroupe)
 {
 	CImgDisplay disp;
-
 	Seance seance1(leGroupe, disp);
-
 	seance1.afficherEndPage();
+
 	seance1.sauvegarde();
 }
 
@@ -29,9 +34,7 @@ void Seance::pageWait()
 	{
 		// Si l'on clique
 		if (disp_.button() == 1)
-		{
 			testMouse(next, previous, end, actualisation);
-		}
 		else
 			disp_.wait();
 		//disp_.wait(50);
@@ -51,12 +54,11 @@ void Seance::pageWait()
 	else if (end)
 	{
 		//afficherEndPage();
-		//sauvegarde();
-    }
-	else if (actualisation)
-	{
-		afficherPageX(pageActuelle_);
 	}
+		
+	else if (actualisation)
+		afficherPageX(pageActuelle_);
+		
 }
 
 void Seance::testMouse(bool& next, bool& previous, bool& end, bool& actualisation)
@@ -65,7 +67,7 @@ void Seance::testMouse(bool& next, bool& previous, bool& end, bool& actualisatio
 		mouseX = disp_.mouse_x(),
 		mouseY = disp_.mouse_y(),
 		numeroeleve;
-	if (mouseX > 1200 && mouseX < 1250 && mouseY>670 && mouseY < 680)
+	if (mouseX > largueur_fenetre - 50 && mouseX < largueur_fenetre && mouseY > hauteur_fenetre - 30 && mouseY < hauteur_fenetre - 20)
 	{
 		next = TRUE;
 		if (pageActuelle_ == nbrPage_ - 1)
@@ -74,7 +76,7 @@ void Seance::testMouse(bool& next, bool& previous, bool& end, bool& actualisatio
 			end = TRUE;
 		}
 	}
-	else if (mouseX > 0 && mouseX < 50 && mouseY>670 && mouseY < 680 && pageActuelle_ > 0)
+	else if (mouseX > 0 && mouseX < 50 && mouseY > hauteur_fenetre - 30 && mouseY < hauteur_fenetre - 20 && pageActuelle_ > 0)
 		previous = TRUE;
 	else
 	{
@@ -93,26 +95,19 @@ int Seance::eleveSelectionne(int mouseX, int mouseY)
 	int
 		numeroeleve = -1;
 	for (int ligne = 0; ligne < 2; ligne++)
-	{
 		for (int colonne = 0; colonne < 5; colonne++)
-		{
-			if (mouseX > 10 * (colonne + 1) + colonne * 240 && mouseX < 10 * (colonne + 1) + (colonne + 1) * 240
-				&& mouseY > 320 * ligne && mouseY < 340 * ligne + 360)
-			{
+			if (mouseX > 10 * (colonne + 1) + colonne * (largueur_image - 10) && mouseX < 10 * (colonne + 1) + (colonne + 1) * (largueur_image - 10)
+				&& mouseY > (hauteur_image - 20) * ligne && mouseY < hauteur_image * ligne + hauteur_image + 20)
 				numeroeleve = ligne * 5 + colonne;
-			}
-		}
-	}
 	if (numeroeleve >= listPage_[pageActuelle_].getNbrEleve())
-	{
 		numeroeleve = -1;
-	}
+	
 	return numeroeleve;
 }
 
 Seance::Seance(groupe leGroupe, CImgDisplay& disp)
 {
-	CImg<unsigned char> image(1250, 700, 1, 3, 255);
+	CImg<unsigned char> image(largueur_fenetre, hauteur_fenetre, 1, 3, 255);
 	vector<eleve> liste;
 	imageBlank_ = image;
 	pageActuelle_ = -1;
@@ -166,12 +161,10 @@ vector<eleve> Seance::getAbsent()
 	vector<Image> lesImages;
 	vector<Image>::iterator itImage;
 	eleve* unEleve;
-	cout << "Définition des objets de getAbsent" << endl;
 
 	for (itPage = lesPage.begin(); itPage != lesPage.end(); itPage++)
 	{
 		lesImages = (*itPage).getListImgEtudiant();
-		cout << "Définition de lesImages" << endl;
 		for (itImage = lesImages.begin(); itImage != lesImages.end(); itImage++)
 		{
 			if (!(*itImage).getPresence())
@@ -189,9 +182,11 @@ vector<eleve> Seance::getAbsent()
 Seance::~Seance()
 {
 	cout << "Destruction initiée !" << endl;
-	//afficherEndPage();
+	cout << "Sauvegarde en cours" << endl;
 	//sauvegarde();
-	disp_.close();
+	cout << "Sauvegarde effectuée" << endl;
+	//disp_.close();
+	cout << "Destruction terminée" << endl;
 }
 
 void Seance::afficherPageX(int numeroPage)
@@ -242,8 +237,7 @@ void Seance::afficherPrecedente()
 
 void Seance::afficherEndPage()
 {
-	imageBlank_.display(disp_);
-	imageBlank_.draw_text(500, 200, "La saisie des absents est terminée.", "texte");
+	imageBlank_.draw_text(500, 200, "La saisie des absents est terminée", "texte");
 	imageBlank_.display(disp_);
 	disp_.wait();
 }
@@ -252,14 +246,14 @@ void Seance::sauvegarde()
 {
 	string nomSeance = "Seance1";
 	cout << "############################# SAUVEGARDE" << endl;
-	ofstream flux(nomSeance+".txt");
+	ofstream flux(nomSeance + ".txt");
 	vector<eleve> absent = getAbsent();
 	flux << "Recapitulatif de la seance 1" << endl << endl;
 	cout << absent.size() << endl;
 	flux << "Il y a eu " << absent.size() << " absents." << endl << endl;
 	flux << "    Nom :    " << "    Prenom :    " << endl << endl;
-	for (int i=0; i< absent.size();i++)
+	for (int i = 0; i< absent.size(); i++)
 	{
-		flux << (absent[i]).getNom() <<"        "<< absent[i].getPrenom() << endl << endl;
+		flux << (absent[i]).getNom() << "        " << absent[i].getPrenom() << endl << endl;
 	}
 }

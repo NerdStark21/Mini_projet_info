@@ -46,7 +46,7 @@ groupe section::afficherGroupe()
 	do
 	{
 		system("cls");
-		cout << "Voici tout les groupes qui appartiennent à la section Fise1 :" << endl;
+		cout << "Voici tous les groupes qui appartiennent à la section Fise1 :" << endl;
 		for (int k = 0; k < getNbrGroupe(); k++)
 		{
 			groupe unGroupe = getGroupe(k);

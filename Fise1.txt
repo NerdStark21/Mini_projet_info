@@ -1,0 +1,108 @@
+ALAOUI ISMAILI;Hafid;E;tn_img-001.ppm
+ANDRIAMIARANTSOANAVALONA;Miray Norotiana;B;img-002.ppm
+ANSART;Valentin;A;img-003.ppm
+BANJAN;Diane;A;img-004.ppm
+BASTY;Theo;D;img-005.ppm
+BAZZAR;Nada;C;img-006.ppm
+BELLOT;Maxime;A;img-007.ppm
+BOUIN;Jérémy;B;img-008.ppm
+BOULAND;Gregoire;C;img-009.ppm
+BOULANGER;Raphaël;C;img-010.ppm
+BOUSSUGE;Victorien;E;img-011.ppm
+BOUTEYRE;Fabien;E;img-012.ppm
+BRAULT;Dylan;D;img-013.ppm
+BRIALON;Auriane;C;img-014.ppm
+BRUHIER;Hugo;A;img-015.ppm
+BURNICHON;Corentin;A;img-016.ppm
+CHALENCON;Nicolas;B;img-017.ppm
+CHAMPELY;Jacques;A;img-018.ppm
+CHATAIGNON;Joseph;E;img-019.ppm
+CHEVASSON;Raphaël;E;img-020.ppm
+CIPRELLI;Damien;D;img-021.ppm
+COIFFIER;Adrien;B;img-022.ppm
+COSTE;Édouard;B;img-023.ppm
+COSTES;Jean;B;img-024.ppm
+COUSIN;Florian;A;img-025.ppm
+CROISET;Vincent;C;img-026.ppm
+DAMOUMAT;Nizare;D;img-027.ppm
+DANSOKHO;Samuel;E;img-028.ppm
+DE POLTORASKY;Kamal;B;img-029.ppm
+DELORME;Tanguy;A;img-030.ppm
+DENIAU;François;C;img-031.ppm
+DESAINTJEAN;Maxime;E;img-032.ppm
+DU;Pingjie;A;img-033.ppm
+DUMON;Geoffrey;D;img-034.ppm
+DUTEMS;Julie;A;img-035.ppm
+EL GBOURI;Taha;B;img-036.ppm
+EL KASMI;Yasser;C;img-037.ppm
+ESCOBAR;Théo;A;img-038.ppm
+ET-TAGHY;Oumaima;E;img-039.ppm
+FAISANDIER;Cyril;E;img-040.ppm
+FALL;Mame Awa;B;img-041.ppm
+FERRERI;Thibaud;C;img-042.ppm
+FONDJOU DOUNOU;Stéphane;A;img-043.ppm
+FOURNIER;Enzo;B;img-044.ppm
+FRADE;Clement;B;img-045.ppm
+GALLEY;Nicolas;C;img-046.ppm
+GARNAUD;Maxence;C;img-047.ppm
+GAUTHIER;Théo;B;img-048.ppm
+GOSSE;Jean;A;img-049.ppm
+GRAMOLI;Lysa;D;img-050.ppm
+GRAPOTTE;Mathys;E;img-051.ppm
+GRELET;Sacha;A;img-052.ppm
+HALLART;Christine;C;img-053.ppm
+HE;Chen;B;img-054.ppm
+HENNEQUIN;Mehdi;B;img-055.ppm
+HENRY;Mathieu;E;img-056.ppm
+HUANG;Jinhe;C;img-057.ppm
+IVALDI;Lucas;D;img-058.ppm
+JONVILLE;Nicolas;E;img-059.ppm
+KASZUBIAK;Grégory;D;img-060.ppm
+KHADRAOUI;Ahmed;D;img-061.ppm
+KORCHI;Anas;A;img-062.ppm
+KRA;Kouassi Guy;E;img-063.ppm
+LAFFONT;Emilie;A;img-064.ppm
+LAIDOUNI;Nabil;D;img-065.ppm
+LE FLOCH;Olivier;B;img-066.ppm
+LEROY;Thomas;C;img-067.ppm
+LI;Qi;D;img-068.ppm
+LU;Yi;E;img-069.ppm
+MAANANE;Yanis;E;img-070.ppm
+MALHERBE;Timoté;C;img-071.ppm
+MARIE;Lucas;C;img-072.ppm
+MEHILA;Abdelkader;D;img-073.ppm
+MERCIER;David;B;img-074.ppm
+MION;Thomas;C;img-075.ppm
+MONTEIRO TEIXEIRA;Pamela;B;img-076.ppm
+MOREL;Maxime;C;img-077.ppm
+MOREL;Théo;D;img-078.ppm
+MORLOT--BAYLE;Hugo;D;img-079.ppm
+MOURLON;Thibaud;E;img-080.ppm
+OBLIN;Rodrigue;B;img-081.ppm
+OKITAUDJI;Florian;D;img-082.ppm
+OLIVER;Nicolas;C;img-083.ppm
+PEREZ;Hanae;B;img-084.ppm
+PERRET;Quentin;C;img-085.ppm
+PERY;Dorian;D;img-086.ppm
+PESENTI;Vincent;E;img-087.ppm
+PEYRARD;Antoine;D;img-088.ppm
+PLAIT;Camille;E;img-089.ppm
+PLANTIER;Nicolas;D;img-090.ppm
+PORTAY;Manon;A;img-091.ppm
+RAILLARD;Thomas;A;img-092.ppm
+RAJAONA;Lionel;E;img-093.ppm
+RAMOS;Theo;C;img-094.ppm
+ROUAULT;Clément;D;img-095.ppm
+ROUBY;Terenui;E;img-096.ppm
+ROUSSEAU;Leo;A;img-097.ppm
+SANE;Baboucar;E;img-098.ppm
+SEGOT;Alexiane;B;img-099.ppm
+SILVESTRE;Charles;C;img-100.ppm
+SMEI;Mohamed;B;img-101.ppm
+STER;Alexis;A;img-102.ppm
+TURPIN;Aurélien;C;img-103.ppm
+VASSEUR;Quentin;E;img-104.ppm
+VAUCHAUSSADE DE CHAUMONT;Louis;D;img-105.ppm
+VAYSSIERE;Romain;E;img-106.ppm
+VELU;Romain;E;img-107.ppm
+YANG;Di;D;img-108.ppm

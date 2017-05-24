@@ -1,6 +1,10 @@
 #include "Image.h"
 #include <iostream>
 
+#define largueur_image 250
+#define hauteur_image 340
+#define taille_check 50
+
 using namespace std;
 using namespace cimg_library;
 
@@ -11,7 +15,7 @@ void Image::modifierImage()
 		imgCheck.load("tn_check_vert.ppm");
 	else
 		imgCheck.load("tn_check_rouge.ppm");
-	image_.draw_image(225, 0, imgCheck);
+	image_.draw_image(largueur_image - 5 - taille_check, 0, imgCheck);
 	//CImgDisplay disp;
 	//image_.display(disp);
 	//disp.wait(5000);
@@ -26,7 +30,7 @@ Image::Image(eleve& unEleve, int numeroImage)
 	// On initialise une image blanche
 	CImg<unsigned char> 
 		imgEtudiant,
-		imgBlank(250, 340, 1, 3, 255);
+		imgBlank(largueur_image, hauteur_image, 1, 3, 255);
 	image_ = imgBlank;
 	string photo;
 	// On récupère le nom du fichier de la photo de l'étudiant
@@ -37,11 +41,11 @@ Image::Image(eleve& unEleve, int numeroImage)
 	image_.draw_image(5, 0, imgEtudiant);
 	// On positionne maintenant le cadre de check
 	imgEtudiant.load("tn_check_vert.ppm");
-	image_.draw_image(225, 0, imgEtudiant);
+	image_.draw_image(largueur_image - 5 - taille_check, 0, imgEtudiant);
 	// On créé la chaine de caractère Nom + Prénom
 	string nomPrenom = unEleve.getNom() + " " + unEleve.getPrenom();
 	// On positionne ensuite cette chaine sous l'image
-	image_.draw_text(5, 320, nomPrenom.c_str(), "texte");
+	image_.draw_text(5, hauteur_image - 20, nomPrenom.c_str(), "texte");
 	cout << "Une image construite" << endl;
 }
 

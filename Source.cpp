@@ -1,10 +1,12 @@
-#include "Section.h"
+#include "Telecom.h"
 #include "CImg.h"
-#include "Page.h"
+#include "Seance.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 #include<locale>	// Pour faire afficher les accents
+
+#define lol 100
 
 using namespace std;
 using namespace cimg_library;
@@ -87,15 +89,14 @@ groupe afficherMenu(section Fise)
 
 int main()
 {
-	cout << "###   Initialisation terminée   ###" << endl;
-	//section Fise1 = initialisation();
-	//Fise1.afficherToutLeMonde();	// Pour vérifier que tout le mode est bien dedans
+	telecom tse(3);
+	section Fise1 = tse.afficherSections();
+	//test(tse.getListeSection()[0].afficherGroupe());
 
-	// Retourne directement le groupe selectionné par l'utilisateur
-	//groupe selectionUt = afficherMenu(Fise1);
-	//cout << "Nous avons bien recupéré le groupe que vous avez sélectionné =)" << endl;
-
-	test(afficherMenu(initialisation()));
+	CImgDisplay disp;
+	Seance seance1(tse.getListeSection()[0].afficherGroupe(), disp);
+	seance1.afficherEndPage();
+	seance1.sauvegarde();
 
 	return 0;
 }
