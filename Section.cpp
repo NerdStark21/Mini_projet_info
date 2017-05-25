@@ -40,23 +40,25 @@ groupe section::getGroupe(int numeroGroupe)
 	}
 }
 
-groupe section::afficherGroupe()
+int section::afficherGroupe()
 {
 	int numero;
 	do
 	{
 		system("cls");
 		cout << "Voici tous les groupes qui appartiennent à la section Fise1 :" << endl;
+		cout << "0) Retour" << endl;
 		for (int k = 0; k < getNbrGroupe(); k++)
 		{
 			groupe unGroupe = getGroupe(k);
-			cout << k + 1 << ") Goupe " << unGroupe.getLettre() << endl;
+			cout << k + 1 << ") Groupe " << unGroupe.getLettre() << endl;
 		}
 		cout << endl;
 		cout << "De quel groupe voulez-vous faire l'appel ?" << endl;
 		cout << ">>> ";
 		cin >> numero;
-	} while (numero <1 || numero >getNbrGroupe());
+	} while (numero < 0 || numero > getNbrGroupe());
 	
-	return getGroupe(numero - 1);
+	// Si return -1 => Retour
+	return numero - 1;
 }

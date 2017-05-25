@@ -15,5 +15,5 @@ public:
 	int getNbrGroupe() { return nbrGroupe_; }
 	// l'on suppose que l'utilisateur va demander un numéro de groupe existant
 	groupe getGroupe(int numeroGroupe);
-	groupe afficherGroupe();
+	int afficherGroupe();
 };

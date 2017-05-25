@@ -20,13 +20,15 @@ void Seance::launcher()
 	while (wait > 0 && wait < 4)
 	{
 		wait = pageWait();
-		imageBlank_.display(disp_);
+		
 		switch (wait)
 		{
 		case 1:
+			imageBlank_.display(disp_);
 			afficherSuivante();
 			break;
 		case 2:
+			imageBlank_.display(disp_);
 			afficherPrecedente();
 			break;
 		case 3:

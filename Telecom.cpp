@@ -93,7 +93,7 @@ void telecom::afficherToutLeMonde()
 	}
 }
 
-section& telecom::afficherSections()
+int telecom::afficherSections()
 {
 	int numero;
 	do
@@ -109,5 +109,19 @@ section& telecom::afficherSections()
 		cin >> numero;
 	} while (numero != 1);
 
-	return listeSections_[0];
+	return numero;
+}
+
+groupe telecom::choixGroupe()
+{
+	int 
+		numeroSection,
+		numeroGroupe;
+	do
+	{
+		numeroSection = afficherSections();
+		numeroGroupe = listeSections_[numeroSection - 1].afficherGroupe();
+	} while (numeroGroupe == -1);
+
+	return getSection(numeroSection - 1).getGroupe(numeroGroupe - 1);
 }

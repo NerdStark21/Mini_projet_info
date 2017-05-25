@@ -6,8 +6,6 @@
 #include <string>
 #include<locale>	// Pour faire afficher les accents
 
-#define lol 100
-
 using namespace std;
 using namespace cimg_library;
 
@@ -90,11 +88,8 @@ groupe afficherMenu(section Fise)
 int main()
 {
 	telecom tse(3);
-	section Fise1 = tse.afficherSections();
-	//test(tse.getListeSection()[0].afficherGroupe());
-
 	CImgDisplay disp;
-	Seance seance1(tse.getListeSection()[0].afficherGroupe(), disp);
+	Seance seance1(tse.choixGroupe(), disp);
 	seance1.launcher();
 
 	return 0;
