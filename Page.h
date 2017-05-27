@@ -20,7 +20,7 @@ class Page
 	void constructionImage();
 	void appendImgEtudiant(Image& unEtudiant) { listImgEtudiant_.push_back(unEtudiant); }
 public:
-	Page(int numeroPage, vector<eleve> listEleve, int nbrPage); // Ne pas passer listEleve en référence !
+	Page(int numeroPage, vector<eleve> listEleve, int nbrPage);
 	CImg<unsigned char> getImage() { return image_; }
 	Image getImgEleve(int k) { return listImgEtudiant_[k]; }
 	int getNbrEleve() { return listEleve_.size(); }

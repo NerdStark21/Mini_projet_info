@@ -1,6 +1,6 @@
-#include "Section.h"
+#include "Telecom.h"
 #include "CImg.h"
-#include "Page.h"
+#include "Seance.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -87,15 +87,10 @@ groupe afficherMenu(section Fise)
 
 int main()
 {
-	cout << "###   Initialisation terminée   ###" << endl;
-	//section Fise1 = initialisation();
-	//Fise1.afficherToutLeMonde();	// Pour vérifier que tout le mode est bien dedans
-
-	// Retourne directement le groupe selectionné par l'utilisateur
-	//groupe selectionUt = afficherMenu(Fise1);
-	//cout << "Nous avons bien recupéré le groupe que vous avez sélectionné =)" << endl;
-
-	test(afficherMenu(initialisation()));
+	telecom tse(3);
+	CImgDisplay disp;
+	Seance seance1(tse.choixGroupe(), disp);
+	seance1.launcher();
 
 	return 0;
 }

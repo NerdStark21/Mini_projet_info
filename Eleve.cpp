@@ -10,3 +10,4 @@ eleve::eleve(string nom, string prenom, char lettreGroupe, string photo)
 	lettreGroupe_ = lettreGroupe;
 	photo_ = photo;
 }
+

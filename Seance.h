@@ -6,7 +6,7 @@
 using namespace cimg_library;
 using namespace std;
 
-void test(groupe& leGroupe);
+
 
 class Seance
 {
@@ -20,26 +20,29 @@ class Seance
 		pageActuelle_,
 		nbrPresent_,
 		nbrPage_;
-	// Fonctions de navigation entre les pages
-	void
-		pageWait(),
-		afficherPageX(int numeroPage),
-		afficherSuivante(),
-		afficherPrecedente();
+	
 	// Fonctions de gestion des absents
 	void
 		testMouse(bool& next, bool& previous, bool& end, bool& actualisation);
 	int
 		eleveSelectionne(int mouseX, int mouseY);
-	// Fonctions de fin d'appel
 
+	
 public:
 	Seance(groupe leGroupe, CImgDisplay& disp);
 	void actualiserPresence(int numeroEleve);
 	vector<eleve> getAbsent();
 	vector<Page>& getListPage() { return listPage_; }
 	~Seance();
+	// Fonctions de fin d'appel
 	void
 		afficherEndPage(),
 		sauvegarde();
+	// Fonctions de navigation entre les pages
+	void
+		afficherPageX(int numeroPage),
+		afficherSuivante(),
+		afficherPrecedente();
+	int pageWait();
+	void launcher();
 };

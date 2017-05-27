@@ -7,9 +7,9 @@
 using namespace std;
 
 
-telecom::telecom(int nbrsections)
+telecom::telecom(int nbrSections)
 {
-	nbrSections_ = nbrsections;
+	nbrSections_ = nbrSections;
 
 	setlocale(LC_CTYPE, "fra");	// Pour faire afficher les accents
 
@@ -17,16 +17,17 @@ telecom::telecom(int nbrsections)
 	string varNom, varPrenom, varGroupe, varPhoto;
 	char numeroGroupe;
 
-	// On crée la Fise1 et son pointeur
+	// On crée la Fise1
 	section Fise1(1);
-	//section* Fise1_p;
-	//Fise1_p = &Fise1;
+
 	// On crée les 5 groupes
 	groupe groupeA('A'), groupeB('B'), groupeC('C'), groupeD('D'), groupeE('E');
 
 	if (flux.is_open())
 	{
-		while (!flux.eof())	// tant que l'on n'est pas à la fin du fichier
+		bool condition;
+		condition = (!flux.eof());
+		while (condition)	// tant que l'on n'est pas à la fin du fichier
 		{
 			getline(flux, varNom, ';');
 			getline(flux, varPrenom, ';');
@@ -34,6 +35,8 @@ telecom::telecom(int nbrsections)
 			getline(flux, varPhoto);
 			numeroGroupe = (char)varGroupe[0];
 			eleve unEleve(varNom, varPrenom, numeroGroupe, varPhoto);
+			if (varNom == "YANG")
+				condition = false;
 			switch (numeroGroupe)
 			{
 			case 'A':
@@ -63,14 +66,14 @@ telecom::telecom(int nbrsections)
 		Fise1.append(groupeD);
 		Fise1.append(groupeE);
 
-		append(Fise1); // On retourne la Fise1 pour pouvoir l'utiliser dans le main (sinon elle est détruite lorsqu'on sort de la fonction d'initialisation
+		appendSection(Fise1);
 	}
 	else
 		cout << "Il y a une erreur dans la matrice au niveau de l'ouverture de Fise1.txt pour l'initialisation" << endl;
 }
 
 
-section telecom::getSection(int numeroSection)
+section& telecom::getSection(int numeroSection)
 {
 	if (numeroSection >= 0 && numeroSection < nbrSections_)
 		return listeSections_[numeroSection];
@@ -80,8 +83,6 @@ section telecom::getSection(int numeroSection)
 		system("pause");
 	}
 }
-
-
 
 
 void telecom::afficherToutLeMonde()
@@ -96,9 +97,7 @@ void telecom::afficherToutLeMonde()
 	}
 }
 
-
-
-section telecom::afficherSections()
+int telecom::afficherSections()
 {
 	int numero;
 	do
@@ -113,6 +112,20 @@ section telecom::afficherSections()
 		cout << ">>> ";
 		cin >> numero;
 	} while (numero != 1);
-	
-	return listeSections_[0];
+
+	return numero;
+}
+
+groupe telecom::choixGroupe()
+{
+	int 
+		numeroSection,
+		numeroGroupe;
+	do
+	{
+		numeroSection = afficherSections();
+		numeroGroupe = listeSections_[numeroSection - 1].afficherGroupe();
+	} while (numeroGroupe == -1);
+
+	return getSection(numeroSection - 1).getGroupe(numeroGroupe);
 }

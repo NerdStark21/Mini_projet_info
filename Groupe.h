@@ -11,7 +11,7 @@ class groupe
 public:
 	groupe(char lettre);
 	char getLettre() { return lettre_; }
-	void appendEleve(eleve unEleve) { listeEleve_.push_back(unEleve); nbrEleve_++; }
+	void appendEleve(eleve& unEleve) { listeEleve_.push_back(unEleve); nbrEleve_++; }
 	int getNbrEleve() { return nbrEleve_; }
 	eleve getEleve(int numeroEleve);
 };
