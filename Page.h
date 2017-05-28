@@ -28,3 +28,5 @@ public:
 	vector<Image>& getListImgEtudiant() { return listImgEtudiant_; }
 	void actualiserPage(int numeroImage);
 };
+
+// Auteur : Aurélien TURPIN
