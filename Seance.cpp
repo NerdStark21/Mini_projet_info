@@ -139,16 +139,16 @@ Seance::Seance(groupe leGroupe, CImgDisplay& disp)
 	else
 		nbrPage_ = intermediaire + 1;
 
-	// On subdivise le groupe selectionnÃ© en groupe de 10 Ã©lÃ¨ves
-	// car on ne veut en afficher que 10 Ã  la fois
-	// Ces 10 Ã©lÃ¨ves sont envoyÃ©s dans le constructeur de la classe Page
-	// pour que l'on puisse en rÃ©cupÃ©rer une image totalement construite
-	// et prÃªte Ã  Ãªtre utilisÃ©e
+	// On subdivise le groupe selectionné en groupe de 10 élèves
+	// car on ne veut en afficher que 10 à la fois
+	// Ces 10 élèves sont envoyés dans le constructeur de la classe Page
+	// pour que l'on puisse en récupérer une image totalement construite
+	// et prête à être utilisée
 	for (int k = 0; k < 10 * (leGroupe.getNbrEleve() / 10 + 1); k += 10)
 	{
-		// ON rÃ©initialise la liste pour ne pas reprendre les mÃªmes
+		// ON réinitialise la liste pour ne pas reprendre les mêmes
 		liste.clear();
-		// Si il reste des groupes de 10 elÃ¨ves Ã  former
+		// Si il reste des groupes de 10 elèves à former
 		if (k + 10 == 10 * (leGroupe.getNbrEleve() / 10 + 1))
 			max = leGroupe.getNbrEleve();
 		// Sinon on fait un groupe avec les restants
@@ -158,9 +158,9 @@ Seance::Seance(groupe leGroupe, CImgDisplay& disp)
 			liste.push_back(leGroupe.getEleve(j));
 		// On construit un objet page
 		Page unePage(k / 10, liste, nbrPage_);
-		// On rÃ©cupÃ¨re l'image et on la stocke dans la classe sÃ©ance
+		// On récupère l'image et on la stocke dans la classe séance
 		listPage_.push_back(unePage);
-		cout << "Une image ajoutÃ©e" << endl;
+		cout << "Une image ajoutée" << endl;
 	}
 }
 
@@ -186,11 +186,26 @@ vector<eleve> Seance::getAbsent()
 			if (!(*itImage).getPresence())
 			{
 				unEleve = (*itImage).getEleve();
+				unEleve.setPrenom(unEleve.getPrenom() + "        Absent");
+				listAbsent.push_back(unEleve);
+			}
+			else
+			{
+				unEleve = (*itImage).getEleve();
+				unEleve.setPrenom(unEleve.getPrenom() + "        Présent");
 				listAbsent.push_back(unEleve);
 			}
 		}
 	}
 	return listAbsent;
+}
+
+Seance::~Seance()
+{
+	cout << "Destruction initiée !" << endl;
+	//sauvegarde();
+	//disp_.close();
+	cout << "Destruction terminée" << endl;
 }
 
 void Seance::afficherPageX(int numeroPage)
@@ -227,7 +242,7 @@ void Seance::afficherPrecedente()
 {
 	if (pageActuelle_ == 0)
 	{
-		cout << ("Il n'y a pas de page prÃ©cÃ©dente !") << endl;
+		cout << ("Il n'y a pas de page précédente !") << endl;
 		pageWait();
 	}
 	else
@@ -239,7 +254,7 @@ void Seance::afficherPrecedente()
 
 void Seance::afficherEndPage()
 {
-	imageBlank_.draw_text(400, 200, "La saisie des absents est terminÃ©e.", "texte",WHITENESS,1,30);
+	imageBlank_.draw_text(400, 200, "La saisie des absents est terminée.", "texte",WHITENESS,1,30);
 	imageBlank_.draw_text(200, 300, "		Vous pouvez retrouver la fiche d'absence sous le nom Fiche d'absence.txt.", "texte", WHITENESS, 1, 20);
 	imageBlank_.display(disp_);
 	disp_.wait();
@@ -249,7 +264,7 @@ void Seance::sauvegarde()
 {
 	vector<eleve> absent = getAbsent();
 	Memoire laMemoire(absent.size());
-	int numero=laMemoire.calculNumeroSeance(); // On calcule le numÃ©ro de la sÃ©ance en cours.
+	int numero=laMemoire.calculNumeroSeance(); // On calcule le numéro de la séance en cours.
 	string numeroChaine = to_string(numero); // Conversion int en string.
 
 	string nomSeance = "Fiche d'absence ";
@@ -257,7 +272,7 @@ void Seance::sauvegarde()
 	ofstream flux((nomSeance + numeroChaine + ".txt").c_str());
 	
 	float compteurEleves = 0;
-	for (unsigned int k = 0; k < listPage_.size(); k++)
+	for (int k = 0; k < listPage_.size(); k++)
 	{
 		compteurEleves = compteurEleves + ((listPage_[k].getListImgEtudiant().size()));
 	}
@@ -279,15 +294,15 @@ void Seance::sauvegarde()
 
 
 	flux << "===============================" << endl;
-	flux << "  Fiche d'absence : sÃ©ance " <<numero<<"."<< endl;
+	flux << "  Fiche d'absence : séance " <<numero<<"."<< endl;
 	flux << "===============================" << endl << endl;
 	flux << "Quelques statistiques :" << endl << endl;
-	flux << "Durant cette sÃ©ance, le nombre d'Ã©tudiants absents est de :" << absent.size() << endl;
-	flux << "Durant cette sÃ©ance, le taux d'absentÃ©isme est de :" << laMemoire.getTauxAbsenteisme() <<"%"<< endl;
-	flux << "La variation du taux d'absentÃ©isme par rapport Ã  la sÃ©ance prÃ©cÃ©dente est de :" << laMemoire.getVariationAbsenteisme() << "%" << endl;
-	flux << "Le nombre d'absents moyen est, en tenant compte de cette sÃ©ance, de :" << laMemoire.getMoyenneAbsents() << endl;
-	flux << "La moyenne du taux d'absentÃ©isme en tenant compte de cette sÃ©ance est de :" << laMemoire.getMoyenneTaux() << "%" << endl << endl;
-	flux << "Les Ã©lÃ¨ves absents durant cette sÃ©ance sont :" << endl << endl;
+	flux << "Durant cette séance, le nombre d'étudiants absents est de :" << absent.size() << endl;
+	flux << "Durant cette séance, le taux d'absentéisme est de :" << laMemoire.getTauxAbsenteisme() <<"%"<< endl;
+	flux << "La variation du taux d'absentéisme par rapport à la séance précdente est de :" << laMemoire.getVariationAbsenteisme() << "%" << endl;
+	flux << "Le nombre d'absents moyen est, en tenant compte de cette séance, de :" << laMemoire.getMoyenneAbsents() << endl;
+	flux << "La moyenne du taux d'absentéisme en tenant compte de cette séance est de :" << laMemoire.getMoyenneTaux() << "%" << endl << endl;
+	flux << "Voici la liste des élèves :" << endl << endl;
 
 
 	//flux << "    Nom :    " << "    Prenom :    " << endl << endl;
@@ -298,5 +313,5 @@ void Seance::sauvegarde()
 	
 	
 	system(("notepad "  + nomSeance + numeroChaine + ".txt").c_str());
-	cout << "Sauvegarde terminÃ©e." << endl;
+	cout << "Sauvegarde terminée." << endl;
 }
