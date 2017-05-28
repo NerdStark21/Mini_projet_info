@@ -11,7 +11,7 @@ class Image
 {
 	// Toutes les images sont de format 250x340
 	CImg<unsigned char> image_;
-	// TRUE si pr�sent et FALSE si absent
+	// TRUE si présent et FALSE si absent
 	bool present_;
 	eleve* eleveAssocie_p_;
 	int numeroImage_;
@@ -23,3 +23,5 @@ public:
 	void actualisationAbsence();
 	bool getPresence() { return present_; }
 };
+
+// Auteur : Aurélien TURPIN
