@@ -18,7 +18,7 @@ class Memoire
 		int getNumeroSeance() { return numeroSeance_; } // Récupère le numéro de la séance actuelle.
 
 		float getTauxAbsenteisme() { return tauxAbsenteisme_ ; }			// Récupère le taux d'absentéisme de la séance actuelle.
-		float getVariationAbsenteisme() { return variationAbsenteisme_; }	// Récupère la variationdu taux d'absentéisme par rapport à la séance précédente.
+		float getVariationAbsenteisme() { return variationAbsenteisme_; }	// Récupère la variation du taux d'absentéisme par rapport à la séance précédente.
 		float getMoyenneAbsents() { return moyenneAbsents_ ; }				// Récupère la moyenne des absents sur toutes les séances.
 		float getMoyenneTaux() { return moyenneTaux_ ; }					// Récupère le taux d'absentéisme moyen sur toutes les séances.
 
@@ -37,3 +37,5 @@ class Memoire
 		float calculMoyenneAbsents(int nbrAbsents);							// Calcule la moyenne du nombre d'absents en allant chercher la moyenne du nombre d'absents dans la fiche d'absence précédente.
 		float calculMoyenneTaux();											// Calcule la moyenne du taux d'absentéisme en allant chercher la moyenne du taux d'absentéisme dans la fiche d'absence précédente.
 };
+
+// Auteur : Raphaël Boulanger
