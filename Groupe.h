@@ -3,10 +3,12 @@
 #include "Eleve.h"
 #include <vector>
 
+using namespace std;
+
 class groupe
 {
 	char lettre_;			//Uniquement une lettre
-	std::vector<eleve> listeEleve_;
+	vector<eleve> listeEleve_;
 	int nbrEleve_;
 public:
 	groupe(char lettre);
@@ -15,5 +17,3 @@ public:
 	int getNbrEleve() { return nbrEleve_; }
 	eleve getEleve(int numeroEleve);
 };
-
-// Auteur : Aurélien TURPIN
