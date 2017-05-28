@@ -10,16 +10,18 @@ using namespace cimg_library;
 class Image
 {
 	// Toutes les images sont au format 250x340
-	CImg<unsigned char> image_;		// Vignette de l'Ètudiant
-	bool present_;					// TRUE si prÈsent et FALSE si absent
-	eleve eleveAssocie_;			// Pour accÈder rapidement ‡ l'ÈlËve ‡ laquelle est associÈe la vignette
-	int numeroImage_;				// Le numÈro de l'image pour pouvoir la retrouver facilement (utile lors de l'actualisation de prÈsence)
+	CImg<unsigned char> image_;		// Vignette de l'√©tudiant
+	bool present_;					// TRUE si pr√©sent et FALSE si absent
+	eleve eleveAssocie_;			// Pour acc√©der rapidement √† l'√©l√®ve √† laquelle est associ√©e la vignette
+	int numeroImage_;				// Le num√©ro de l'image pour pouvoir la retrouver facilement (utile lors de l'actualisation de pr√©sence)
 public:
-	void modifierImage();			//  Actualise l'icÙne de prÈsence (croix rouge ou V vert) en fonction du nouvel Ètat de prÈsence de l'Ètudiant
-	Image(eleve& unEleve, int numeroImage);		// Construit la vignette de l'Ètudiant en positionant la photo, le nom, le prÈnom et l'icÙne de prÈsence (prÈsent par dÈfaut)
+	void modifierImage();			//  Actualise l'ic√¥ne de pr√©sence (croix rouge ou V vert) en fonction du nouvel √©tat de pr√©sence de l'√©tudiant
+	Image(eleve& unEleve, int numeroImage);		// Construit la vignette de l'√©tudiant en positionant la photo, le nom, le pr√©nom et l'ic√¥ne de pr√©sence (pr√©sent par d√©faut)
 	void actualisationAbsence();	// Actualise la valeur de present_ et lance modifierImage
-	// MÈthodes en ligne
+	// M√©thodes en ligne
 	bool getPresence() { return present_; }
 	eleve getEleve() { return eleveAssocie_; }
 	CImg<unsigned char> getImage() { return image_; }
 };
+
+// Auteur : Aur√©lien TURPIN
