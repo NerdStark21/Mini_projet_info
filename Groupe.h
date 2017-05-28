@@ -15,3 +15,5 @@ public:
 	int getNbrEleve() { return nbrEleve_; }
 	eleve getEleve(int numeroEleve);
 };
+
+// Auteur : Aurélien TURPIN
