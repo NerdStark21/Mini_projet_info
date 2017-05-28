@@ -39,3 +39,5 @@ class Memoire
 		float calculMoyenneTaux(); // Calcule la moyenne du taux d'absentéisme en allant chercher la moyenne du taux d'absentéisme dans la fiche d'absence précédente.
 
 };
+
+// Auteur : Raphaël BOULANGER
