@@ -46,3 +46,5 @@ public:
 	int pageWait();
 	void launcher();
 };
+
+// Auteur : Aurélien TURPIN et Raphaël BOULANGER
