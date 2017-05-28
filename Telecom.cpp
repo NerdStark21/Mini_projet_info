@@ -25,9 +25,7 @@ telecom::telecom(int nbrSections)
 
 	if (flux.is_open())
 	{
-		bool condition;
-		condition = (!flux.eof());
-		while (condition)	// tant que l'on n'est pas à la fin du fichier
+		while (!flux.eof())	// tant que l'on n'est pas à la fin du fichier
 		{
 			getline(flux, varNom, ';');
 			getline(flux, varPrenom, ';');
@@ -35,8 +33,6 @@ telecom::telecom(int nbrSections)
 			getline(flux, varPhoto);
 			numeroGroupe = (char)varGroupe[0];
 			eleve unEleve(varNom, varPrenom, numeroGroupe, varPhoto);
-			if (varNom == "YANG")
-				condition = false;
 			switch (numeroGroupe)
 			{
 			case 'A':
@@ -127,5 +123,5 @@ groupe telecom::choixGroupe()
 		numeroGroupe = listeSections_[numeroSection - 1].afficherGroupe();
 	} while (numeroGroupe == -1);
 
-	return getSection(numeroSection - 1).getGroupe(numeroGroupe);
+	return getSection(numeroSection - 1).getGroupe(numeroGroupe - 1);
 }

@@ -60,5 +60,5 @@ int section::afficherGroupe()
 	} while (numero < 0 || numero > getNbrGroupe());
 	
 	// Si return -1 => Retour
-	return numero-1;
+	return numero - 1;
 }

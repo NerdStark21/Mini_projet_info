@@ -11,7 +11,7 @@ class eleve
 	char lettreGroupe_;		// Un seul caractere
 	string photo_;		// Le nom de la photo associée
 public:
-	eleve(string nom="", string prenom="", char lettreGroupe='A', string photo="");
+	eleve(string nom, string prenom, char lettreGroupe, string photo);
 	string getNom() { return nom_; }
 	string getPrenom() { return prenom_; }
 	char getNumeroGroupe() { return lettreGroupe_; }

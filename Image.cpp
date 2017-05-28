@@ -24,7 +24,7 @@ void Image::modifierImage()
 Image::Image(eleve& unEleve, int numeroImage)
 {
 	numeroImage_ = numeroImage;
-	eleveAssocie_p_ = unEleve;
+	eleveAssocie_p_ = &unEleve;
 	// Par défaut l'étudiant est noté comme présent
 	present_ = TRUE;
 	// On initialise une image blanche
