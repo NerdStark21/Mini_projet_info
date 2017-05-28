@@ -19,3 +19,5 @@ public :
 	int afficherSections();							// Affiche le premier menu (avec les sections) dans une fenêtre console et renvoie le choix de section de l'utilisateur.
 	groupe choixGroupe();							// Affiche le second menu (avec les groupes de la section choisie) et renvoie l'objet Groupe correspondant au choix de l'utilisateur.
 };
+
+// Auteur : Raphaël Boulanger
